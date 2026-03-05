@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+* {
+  box-sizing: border-box;
+  font-family: "Inter";
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #0a1a0f;
+}
+
+.active {
+  background-color: rgba(20, 117, 49, 0.404);
+}

@@ -1,0 +1,7 @@
+{
+  "editor.quickSuggestionsDelay": 0,
+  "editor.suggestOnTriggerCharacters": true,
+  "editor.acceptSuggestionOnCommitCharacter": true,
+  "editor.wordBasedSuggestions": "currentDocument",
+  "postman.settings.dotenv-detection-notification-visibility": false
+}
