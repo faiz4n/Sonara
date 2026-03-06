@@ -28,32 +28,37 @@ async function createMusic(req, res) {
 }
 
 async function createAlbum(req, res) {
-  const { title, musics } = req.body;
-  const albumArtFile = req.file;
+  try {
+    const { title, musics } = req.body;
+    const albumArtFile = req.file;
 
-  if (!albumArtFile)
-    return res.status(400).json({ msg: "Missing album art file" });
+    if (!albumArtFile)
+      return res.status(400).json({ msg: "Missing album art file" });
 
-  const albumResult = await uploadAlbumArt(
-    albumArtFile.buffer.toString("base64"),
-  );
+    const albumResult = await uploadAlbumArt(
+      albumArtFile.buffer.toString("base64"),
+    );
 
-  const album = await albumModel.create({
-    title,
-    artist: req.user.id,
-    albumArt: albumResult.url,
-    musics: musics,
-  });
+    const album = await albumModel.create({
+      title,
+      artist: req.user.id,
+      albumArt: albumResult.url,
+      musics: musics,
+    });
 
-  res.status(201).json({
-    msg: "Album created successfully",
-    album: {
-      id: album._id,
-      title: album.title,
-      albumArt: album.albumArt,
-      musics: album.musics,
-    },
-  });
+    res.status(201).json({
+      msg: "Album created successfully",
+      album: {
+        id: album._id,
+        title: album.title,
+        albumArt: album.albumArt,
+        musics: album.musics,
+      },
+    });
+  } catch (err) {
+    console.error("Create album error:", err);
+    res.status(500).json({ msg: err.message || "Failed to create album" });
+  }
 }
 
 async function getAllMusic(req, res) {

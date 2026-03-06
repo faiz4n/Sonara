@@ -3,29 +3,15 @@ import TrackRow from "./TrackRow";
 
 function ArtistTrackList({ trackList, setTrackList }) {
   return (
-    <div className="flex flex-col my-10 w-180 ">
-      <div className="flex justify-between items-center w-full mb-3">
-        <h1 className="font-bold text-xl">Your Tracks</h1>
+    <div className="flex flex-col my-10 w-full px-3 md:px-0 md:w-180  mx-2 mb-30 ">
+      <div className="flex justify-between items-center w-full mb-0 flex-col md:flex-row gap-1 bg-green-100/15 p-3 max-md:p-1 rounded-tl-md rounded-tr-md ">
+        <h1 className="font-bold text-lg md:text-xl">Your Tracks</h1>
         <span className="text-[10px] font-semibold text-zinc-200/40">
           {trackList.length} TOTAL TRACKS
         </span>
       </div>
 
-      {trackList.length > 0 ? (
-        <div className="flex items-center w-full bg-green-100/15 p-3 rounded-tl-md rounded-tr-md">
-          <>
-            <span className="flex-1 text-[10px] font-semibold text-zinc-200/70">
-              TRACK INFO
-            </span>
-            <span className="flex-1 text-center text-[10px] font-semibold text-zinc-200/70">
-              RELEASE DATE
-            </span>
-            <span className="flex-1 text-right text-[10px] font-semibold text-zinc-200/70">
-              ACTIONS
-            </span>
-          </>
-        </div>
-      ) : (
+      {!trackList.length && (
         <h1 className="text-center text-zinc-300/50 text-xs mt-5">
           Your uploaded tracks will appear here.
         </h1>

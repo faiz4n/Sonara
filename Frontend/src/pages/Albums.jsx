@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../components/layout/Header";
+import PageHeader from "../components/layout/PageHeader";
 import AlbumList from "../components/music/AlbumList";
 import { getAllAlbums } from "../services/music.service";
 
@@ -21,7 +21,7 @@ function Albums() {
   };
   return (
     <>
-      <Header heading={headers.heading} caption={headers.caption} />
+      <PageHeader heading={headers.heading} caption={headers.caption} />
       <div className="p-5">
         <AlbumList albums={albums} />
       </div>

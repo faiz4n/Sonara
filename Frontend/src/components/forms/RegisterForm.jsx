@@ -49,7 +49,7 @@ function RegisterForm() {
   return (
     <form
       onSubmit={handleRegisterUser}
-      className="flex flex-col text-white bg-green-800/20 gap-2 py-5 px-5 border-2 max-w-90 w-full  border-zinc-200/20 rounded-lg"
+      className="flex flex-col mx-2 text-white bg-green-800/20 gap-2 py-5 px-5 border-2 max-w-90 w-full  border-zinc-200/20 rounded-lg"
     >
       <FormHeading heading={headers.heading} caption={headers.caption} />
       {apiError && (

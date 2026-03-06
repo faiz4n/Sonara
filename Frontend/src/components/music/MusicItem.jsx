@@ -5,11 +5,11 @@ function MusicItem({ title, artist, duration, coverImage }) {
   return (
     <div className="flex p-5 justify-between rounded-xl hover:bg-green-600/10">
       <div className="flex gap-5">
-        <div className="w-15 h-15 rounded-xl overflow-hidden">
+        <div className="w-15 h-15 shrink-0 rounded-xl overflow-hidden">
           <img
-            src={coverImage}
+            src={coverImage || "track-icon.png"}
             alt=""
-            className=" w-full h-full object-cover"
+            className="w-full h-full object-cover "
           />
         </div>
         <div className="">

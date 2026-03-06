@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAllAlbums } from "../../services/music.service";
 import AlbumItem from "../music/AlbumItem";
-import { CirclePlus, Disc, Upload, X } from "lucide-react";
+import { CirclePlus, Disc, Minus, Plus, Upload, X } from "lucide-react";
 import DropDown from "../UI/DropDown";
 import UploadMusicForm from "../forms/UploadMusicForm";
 import CreateAlbumForm from "../forms/CreateAlbumForm";
 
-function ArtistAlbumList({
-  songTitle,
-  setSongTitle,
-  file,
-  setFile,
-  fileName,
-  setFileName,
-  trackList,
-  setTrackList,
-}) {
+function ArtistAlbumList({ trackList, setTrackList }) {
   const [albums, setAlbums] = useState([]);
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -39,7 +30,11 @@ function ArtistAlbumList({
   function handleNewAlbum() {
     setIsModelOpen(true);
     setModalContent(
-      <CreateAlbumForm resetModal={resetModal} trackList={trackList} />,
+      <CreateAlbumForm
+        resetModal={resetModal}
+        trackList={trackList}
+        setAlbums={setAlbums}
+      />,
     );
   }
 
@@ -51,26 +46,22 @@ function ArtistAlbumList({
 
   return (
     <div className="m-7">
+      {/* Modal */}
       {isModalOpen && (
         <div className="fixed flex justify-center items-center inset-0 bg-black/50 backdrop-blur-sm z-50">
-          <button
-            onClick={resetModal}
-            className="absolute right-20 top-8 bg-green-950 p-2 rounded-md cursor-pointer px-3 flex justify-center gap-2"
-          >
-            <X />
-            Close
-          </button>
           {modalContent}
         </div>
       )}
+
+      {/* Album List */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold w-full ">Your Albums</h1>
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className="w-40  flex justify-center p-2 rounded-md cursor-pointer gap-2 bg-green-600"
+            className="w-14 h-14 md:w-17 md:h-17 fixed bottom-[12%] md:bottom-[8%] md:right-[5%] right-[7%] z-40 flex justify-center items-center p-2 rounded-full cursor-pointer gap-2 bg-green-500 hover:bg-green-600 shadow-lg shadow-green-400/20 active:scale-95 outline-none transition-all"
           >
-            <CirclePlus /> New
+            {isDropdownOpen ? <Minus /> : <Plus />}
           </button>
           {isDropdownOpen && (
             <DropDown
@@ -90,14 +81,17 @@ function ArtistAlbumList({
           )}
         </div>
       </div>
+
       <div className="mt-7">
-        <ul className="flex gap-5 flex-wrap">
+        <div className="grid 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 lg:place-items-center md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-5">
           {albums.map((album) => (
-            <li key={album._id}>
-              <AlbumItem title={album.title} />
-            </li>
+            <AlbumItem
+              key={album._id}
+              title={album.title}
+              albumArt={album.albumArt}
+            />
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

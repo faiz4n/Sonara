@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import { AuthProvider } from "./context/authContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
+import SidebarMobile from "./components/layout/SidebarMobile";
+import PageHeader from "./components/layout/PageHeader";
+import Header from "./components/UI/Header";
 
 function App() {
   return (
@@ -26,9 +29,10 @@ function App() {
             <Route
               path="/*"
               element={
-                <div className="h-screen text-white flex">
+                <div className="h-screen text-white flex flex-col">
                   <Sidebar />
-                  <div className="ml-80 w-full">
+                  <Header />
+                  <div className="flex-1 overflow-y-auto overflow-x-hidden md:ml-80 max-md:mb-19 w-full md:w-auto">
                     <Routes>
                       <Route path="/" element={<HomePage />} />
                       <Route path="/albums" element={<Albums />} />
@@ -41,6 +45,7 @@ function App() {
                       </Route>
                     </Routes>
                   </div>
+                  <SidebarMobile />
                 </div>
               }
             />

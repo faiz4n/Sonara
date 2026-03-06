@@ -3,13 +3,15 @@ import AlbumItem from "./AlbumItem";
 function AlbumList({ albums }) {
   return (
     <div>
-      <ul className="flex gap-5 flex-wrap">
+      <div className="grid 2xl:grid-cols-7 xl:grid-cols-6 lg:grid-cols-4 lg:place-items-center md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-3.5 ">
         {albums.map((album) => (
-          <li key={album._id}>
-            <AlbumItem title={album.title} />
-          </li>
+          <AlbumItem
+            title={album.title}
+            key={album._id}
+            albumArt={album.albumArt}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

@@ -19,6 +19,7 @@ async function uploadAlbumArt(file) {
     fileName: "album_art" + Date.now(),
     folder: "faizan/albumArt",
   });
+  return result;
 }
 
 module.exports = { uploadMusic, uploadAlbumArt };

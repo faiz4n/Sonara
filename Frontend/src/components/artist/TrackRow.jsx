@@ -16,11 +16,15 @@ function TrackRow({
     setTrackList((prev) => prev.filter((track) => track._id !== id));
   }
   return (
-    <div className="flex items-center bg-green-900/20 border border-zinc-100/10 p-3 border-t-0">
+    <div className="flex items-center bg-green-900/20 border border-zinc-100/10 p-3 border-t-0 ">
       <div className="flex-1 items-center flex gap-2">
-        <div className="bg-green-600/20 w-8 h-8 overflow-hidden rounded">
+        <div className="bg-green-600/20 w-8 h-8 overflow-hidden rounded shrink-0">
           {/* <Music size={20} color="green" /> */}
-          <img src={coverImage} alt="" className="w-full h-full object-cover" />
+          <img
+            src={coverImage}
+            alt=""
+            className="w-full h-full object-cover "
+          />
         </div>
         <div className="flex flex-col gap-0.5">
           <h1 className="text-xs font-bold">{title}</h1>
@@ -30,7 +34,7 @@ function TrackRow({
         </div>
       </div>
       <div className="flex-1 text-center">
-        <span className="text-xs text-zinc-200/50 italic">{`Uploaded ${uploadDate}`}</span>
+        <span className="text-xs text-zinc-200/50 italic">{uploadDate}</span>
       </div>
       <div className="flex-1 flex gap-4 justify-end text-zinc-300/80">
         <Trash

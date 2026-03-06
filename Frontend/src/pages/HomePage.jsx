@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../components/layout/Header";
+import PageHeader from "../components/layout/PageHeader";
 import MusicList from "../components/music/MusicList";
 import { getAllMusic } from "../services/music.service";
 
@@ -27,8 +27,8 @@ function HomePage() {
   };
   return (
     <>
-      <Header heading={headers.heading} caption={headers.caption} />
-      <div className="p-5">
+      <PageHeader heading={headers.heading} caption={headers.caption} />
+      <div className="md:p-5">
         <MusicList tracks={tracks} />
       </div>
     </>
