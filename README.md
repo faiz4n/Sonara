@@ -120,43 +120,27 @@ The backend API will run on `http://localhost:5000`
 ### Music
 
 - `GET /api/music` - Get all music
-- `GET /api/music/me` - Get user's uploaded tracks
-- `POST /api/music/upload` - Upload new track
-- `DELETE /api/music/delete/:musicId` - Delete track
+- `GET /api/music/me` - Get user's uploaded tracks (requires auth)
+- `POST /api/music/upload` - Upload new track (requires auth, multipart/form-data)
+- `POST /api/music/delete/:musicId` - Delete track (requires auth)
 
 ### Albums
 
 - `GET /api/music/album` - Get all albums
 - `GET /api/music/album/:albumId` - Get album details
-- `POST /api/music/album` - Create new album
+- `POST /api/music/album` - Create new album (requires auth, multipart/form-data)
 
 ## Recent Updates
 
 ### Version 1.1 - March 7, 2026
-- ✅ Fixed form submissions (Enter key support)
-- ✅ Improved image handling in track/album items
-- ✅ Fixed album creation with proper validation
+
 - ✅ Built complete profile page with user information
-- ✅ Refactored Header component to PageHeader
-- ✅ Enhanced error handling and validation in all forms
-- ✅ Fixed dropdown positioning and animations
+- ✅ Fixed album creation with proper validation
 - ✅ Implemented track selection for album creation
 - ✅ Added mobile-responsive layouts
-- ✅ Removed .vscode from git tracking
+- ✅ Enhanced form error handling
 
-## Future Roadmap
 
-- [ ] Music player with playback controls
-- [ ] Search and filter functionality
-- [ ] Playlists feature
-- [ ] User follows/subscriptions
-- [ ] Comments and ratings
-- [ ] Analytics dashboard
-- [ ] Notifications system
-
-## License
-
-MIT
 
 ## Contributing
 
