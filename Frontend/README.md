@@ -1,16 +1,115 @@
-# React + Vite
+# Sonara 🎵
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack music streaming and management platform for artists to upload, organize, and share their music.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **🔐 User Authentication** - Secure registration and login system
+- **🎼 Track Management** - Upload music files with cover art and metadata
+- **💿 Album Creation** - Organize tracks into albums with custom artwork
+- **🎨 Artist Studio** - Dashboard for artists to manage their content
+- **🎧 Music Discovery** - Browse and discover music
+- **⚡ Real-time Progress** - Upload tracking with visual feedback
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+- React 18 + Vite
+- Tailwind CSS
+- Lucide React Icons
+- React Router for navigation
+- Axios for API calls
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+
+- Node.js + Express
+- MongoDB
+- JWT Authentication
+- File storage service integration
+
+## Project Structure
+
+```
+Sonara/
+├── Backend/
+│   ├── src/
+│   │   ├── controllers/     # Route handlers
+│   │   ├── models/          # MongoDB schemas
+│   │   ├── routes/          # API endpoints
+│   │   ├── middlewares/     # Auth & validation
+│   │   ├── services/        # File storage logic
+│   │   └── db/              # Database connection
+│   ├── server.js            # Server entry point
+│   └── package.json
+│
+└── Frontend/
+    ├── src/
+    │   ├── components/      # React components
+    │   ├── pages/           # Page components
+    │   ├── services/        # API services
+    │   ├── context/         # Auth context
+    │   └── utils/           # Helper functions
+    ├── vite.config.js
+    └── package.json
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14+)
+- MongoDB connection string
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/faiz4n/sonara.git
+cd sonara
+```
+
+2. **Backend Setup**
+
+```bash
+cd Backend
+npm install
+# Create .env file with MongoDB URI and other configs
+npm run dev
+```
+
+3. **Frontend Setup**
+
+```bash
+cd Frontend
+npm install
+npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+## API Endpoints
+
+### Auth
+
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+
+### Music
+
+- `GET /api/music` - Get all music
+- `GET /api/music/my` - Get user's music
+- `POST /api/music` - Upload new track
+- `DELETE /api/music/:id` - Delete track
+
+### Albums
+
+- `GET /api/albums` - Get all albums
+- `GET /api/albums/:id` - Get album details
+- `POST /api/albums` - Create album
+
+## Contributing
+
+Contributions are welcome! Feel free to submit issues and pull requests.

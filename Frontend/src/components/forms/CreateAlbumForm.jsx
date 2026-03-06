@@ -1,12 +1,14 @@
-import { Disc, ImagePlus, ListPlus, Upload } from "lucide-react";
+import { Disc, ImagePlus, ListPlus, Upload, X } from "lucide-react";
 import TrackSelector from "../UI/TrackSelector";
 import TextInput from "../UI/TextInput";
 import Button from "../UI/Button";
 import FormHeading from "../UI/FormHeading";
 import { useState } from "react";
 import FileUploadField from "../UI/FileUploadField";
+import { createAlbum } from "../../services/music.service";
+import UploadSpinner from "../UI/UploadSpinner";
 
-function CreateAlbumForm({ trackList }) {
+function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
   const [albumTitle, setAlbumTitle] = useState("");
   const [selectedTracks, setSelectedTracks] = useState([]);
   const [albumArtFile, setAlbumArtFile] = useState(null);
@@ -15,7 +17,7 @@ function CreateAlbumForm({ trackList }) {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  function handleCreateAlbum(e) {
+  async function handleCreateAlbum(e) {
     e.preventDefault();
     setError("");
 
@@ -32,10 +34,28 @@ function CreateAlbumForm({ trackList }) {
 
     const formData = new FormData();
     formData.append("title", albumTitle);
-    formData.append("musics", JSON.stringify(selectedTracks));
-    formData.append("albumArt", albumArtFile);
+    selectedTracks.forEach((trackId) => {
+      formData.append("musics[]", trackId);
+    });
+    formData.append("file", albumArtFile);
 
-    // TODO: Call API to create album with formData
+    setIsUploading(true);
+
+    try {
+      const result = await createAlbum(
+        formData,
+        setIsUploading,
+        setUploadSuccess,
+      );
+      console.log("album creation result : ", result);
+      if (result) {
+        setAlbums((prev) => [...prev], result.album);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsUploading(false);
+    }
   }
 
   function handleFileChange(e) {
@@ -56,40 +76,80 @@ function CreateAlbumForm({ trackList }) {
     }
   }
 
+  function handleFormReset() {
+    setUploadSuccess(false);
+    setAlbumArtFile(null);
+    setAlbumArtName("");
+    resetModal();
+  }
+
   return (
     <form
       onSubmit={handleCreateAlbum}
-      className="flex flex-col  bg-green-950 gap-2 py-5 px-5 border-2 max-w-90 w-full  border-zinc-200/20 rounded-lg"
+      className="flex flex-col mx-2 bg-green-950 gap-2 py-5 px-5 border-2 max-w-90 w-full  border-zinc-200/20 rounded-lg"
     >
-      <FormHeading heading={"Create Album"} icon={Disc} />
+      {!isUploading && !uploadSuccess && (
+        <>
+          <FormHeading heading={"Create Album"} icon={Disc} />
 
-      {error && (
-        <p className="text-red-400 text-xs text-center bg-red-500/30 p-2 rounded">
-          {error}
-        </p>
+          {error && (
+            <p className="text-red-400 text-xs text-center bg-red-500/30 p-2 rounded">
+              {error}
+            </p>
+          )}
+
+          <div className="w-full">
+            <TextInput
+              label={"Album Title"}
+              value={albumTitle}
+              onChange={(e) => setAlbumTitle(e.target.value)}
+              placeholder={"Enter album title"}
+            />
+            <TrackSelector
+              trackList={trackList}
+              setSelectedTracks={setSelectedTracks}
+            />
+            <FileUploadField
+              handleFileChange={handleFileChange}
+              isUploading={isUploading}
+              fileName={albumArtName}
+              icon={ImagePlus}
+              types={".jpg,.jpeg,.png"}
+              label={"Track Cover Image"}
+            />
+            <div className="flex gap-2">
+              <Button
+                label={"Create Album"}
+                icon={ListPlus}
+                onClick={handleCreateAlbum}
+              />
+              <button
+                onClick={resetModal}
+                className="bg-red-500 hover:bg-red-600 rounded-md cursor-pointer flex justify-center gap-1 mt-3 items-center p-2 text-sm font-semibold"
+              >
+                <X />
+                Close
+              </button>
+            </div>
+          </div>
+        </>
       )}
+      {isUploading && <UploadSpinner />}
 
-      <div className="w-full">
-        <TextInput
-          label={"Album Title"}
-          value={albumTitle}
-          onChange={(e) => setAlbumTitle(e.target.value)}
-          placeholder={"Enter album title"}
-        />
-        <TrackSelector
-          trackList={trackList}
-          setSelectedTracks={setSelectedTracks}
-        />
-        <FileUploadField
-          handleFileChange={handleFileChange}
-          isUploading={isUploading}
-          fileName={albumArtName}
-          icon={ImagePlus}
-          types={".jpg,.jpeg,.png"}
-          label={"Track Cover Image"}
-        />
-        <Button label={"Create Album"} icon={ListPlus} />
-      </div>
+      {uploadSuccess && (
+        <div className=" flex flex-col items-center justify-center h-full">
+          <p className="text-md text-green-500">Album successfully created!</p>
+          <Button
+            label={"Done"}
+            onClick={() => {
+              if (uploadSuccess) {
+                handleFormReset();
+                return;
+              }
+            }}
+          />
+        </div>
+      )}
     </form>
   );
 }

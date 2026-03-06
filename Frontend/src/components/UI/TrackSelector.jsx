@@ -1,7 +1,4 @@
-import { useState } from "react";
-
-function TrackSelector({ trackList }) {
-  const [selectedTracks, setSelectedTracks] = useState([]);
+function TrackSelector({ trackList, setSelectedTracks }) {
   return (
     <>
       <p className="text-[11px] my-1 text-zinc-300">Select Tracks</p>

@@ -1,4 +1,4 @@
-import { Check, CloudUpload, ImagePlus, Upload } from "lucide-react";
+import { Check, CloudUpload, ImagePlus, Upload, X } from "lucide-react";
 import FileUploadField from "../UI/FileUploadField";
 import { FileHeadphone } from "lucide-react";
 import TextInput from "../UI/TextInput";
@@ -116,7 +116,7 @@ function UploadMusicForm({ setTrackList, resetModal }) {
   }
 
   return (
-    <form className="flex flex-col  bg-green-950 gap-2 py-5 px-5 border-2 max-w-95 w-full  border-zinc-200/20 rounded-lg">
+    <form className="flex flex-col mx-2 bg-green-950 gap-2 py-5 px-5 border-2 max-w-95 w-full  border-zinc-200/20 rounded-lg">
       {!isUploading && !uploadSuccess && (
         <>
           <div className="flex items-center gap-2">
@@ -155,11 +155,20 @@ function UploadMusicForm({ setTrackList, resetModal }) {
                 label={"Track Cover Image"}
               />
             </div>
-            <Button
-              label={!uploadSuccess ? "Upload Track" : "Done"}
-              icon={uploadSuccess ? Check : Upload}
-              onClick={handleUpload}
-            />
+            <div className="flex gap-2">
+              <Button
+                label={!uploadSuccess ? "Upload Track" : "Done"}
+                icon={uploadSuccess ? Check : Upload}
+                onClick={handleUpload}
+              />
+              <button
+                onClick={resetModal}
+                className="bg-red-500 hover:bg-red-600 rounded-md cursor-pointer flex justify-center gap-1 mt-3 items-center p-2 text-sm font-semibold"
+              >
+                <X />
+                Close
+              </button>
+            </div>
           </div>
         </>
       )}

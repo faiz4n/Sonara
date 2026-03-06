@@ -37,12 +37,16 @@ export async function uploadMusic(formData, setIsUploading, setUploadSuccess) {
   }
 }
 
-export async function createAlbum(formData) {
+export async function createAlbum(formData, setIsUploading, setUploadSuccess) {
   try {
-    const response = await api.post("/api/music/album");
+    setIsUploading(true);
+    const response = await api.post("/api/music/album", formData);
     console.log(response.data);
     return response.data;
   } catch (err) {
     console.log(err);
+  } finally {
+    setIsUploading(false);
+    setUploadSuccess(true);
   }
 }

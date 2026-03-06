@@ -13,7 +13,7 @@ function Sidebar() {
   }
 
   return (
-    <div className="flex flex-col fixed w-80 bg-[#102617] shrink-0 border-r-2 border-r-zinc-700/20 h-screen">
+    <div className="flex flex-col fixed w-80  h-full bg-[#0b1710] shrink-0 border-r-2 border-r-zinc-700/20 max-md:hidden">
       <div className="p-5">
         <h1 className="text-[#1DB954] font-bold text-3xl">Sonara</h1>
         <p className="text-[11px] text-zinc-400 font-semibold">
@@ -34,13 +34,13 @@ function Sidebar() {
         </div>
         <div>
           <SidebarItems label={user.username} icon={User} path={"/profile"} />
-          <button
+          {/* <button
             onClick={handleLogout}
-            className="flex items-center gap-2 p-3 text-[14px] rounded-md font-semibold hover:bg-[#1DB954]/10 my-2 w-full cursor-pointer"
+            className="flex justify-start w-full items-center gap-2 p-3 text-[14px] rounded-md font-semibold hover:bg-[#1DB954]/10 my-2 cursor-pointer"
           >
             <LogOutIcon size={28} className="text-[#1DB954]" />
             <span>Logout</span>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
