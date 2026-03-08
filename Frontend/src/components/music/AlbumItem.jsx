@@ -1,6 +1,6 @@
-function AlbumItem({ title, albumArt }) {
+function AlbumItem({ title, albumArt, artist }) {
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div>
       <div className="relative items-stretch aspect-square overflow-hidden rounded-2xl cursor-pointer">
         <img
           src={albumArt || "track-icon.png"}
@@ -8,9 +8,10 @@ function AlbumItem({ title, albumArt }) {
           className="w-full h-full object-cover hover:scale-105 transition ease-in duration-300"
         />
       </div>
-      <h1 className="p-1 text-sm font-semibold truncate text-center">
-        {title}
-      </h1>
+      <div className="px-2 py-1">
+        <h1 className="text-sm font-semibold truncate line-clamp-1">{title}</h1>
+        <p className="text-sm text-zinc-400 truncate line-clamp-1">{artist}</p>
+      </div>
     </div>
   );
 }

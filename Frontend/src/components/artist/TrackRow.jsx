@@ -33,7 +33,7 @@ function TrackRow({
           </p>
         </div>
       </div>
-      <div className="flex-1 text-center">
+      <div className="flex-1 text-center max-md:hidden">
         <span className="text-xs text-zinc-200/50 italic">{uploadDate}</span>
       </div>
       <div className="flex-1 flex gap-4 justify-end text-zinc-300/80">

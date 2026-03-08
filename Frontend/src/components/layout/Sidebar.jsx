@@ -1,19 +1,12 @@
-import { House, Disc, User, Box, LogOutIcon } from "lucide-react";
+import { House, Library, User, Box, LogOutIcon } from "lucide-react";
 import SidebarItems from "./SidebarItems";
-import { logoutUser } from "../../services/auth.service";
 import { useAuth } from "../../context/authContext";
 
 function Sidebar() {
-  const { user, setUser } = useAuth();
-  console.log(user);
-
-  async function handleLogout() {
-    await logoutUser();
-    setUser(null);
-  }
+  const { user } = useAuth();
 
   return (
-    <div className="flex flex-col fixed w-80  h-full bg-[#0b1710] shrink-0 border-r-2 border-r-zinc-700/20 max-md:hidden">
+    <div className="flex flex-col fixed w-80 h-full bg-[#020a05] bg-gradient-to-b from-[#1DB954]/5 to-transparent shrink-0 border-r border-[#1DB954]/10 max-md:hidden">
       <div className="p-5">
         <h1 className="text-[#1DB954] font-bold text-3xl">Sonara</h1>
         <p className="text-[11px] text-zinc-400 font-semibold">
@@ -23,7 +16,7 @@ function Sidebar() {
       <div className=" h-full flex flex-col justify-between px-3">
         <div>
           <SidebarItems label="Home" icon={House} path={"/"} />
-          <SidebarItems label="Albums" icon={Disc} path={"/albums"} />
+          <SidebarItems label="Albums" icon={Library} path={"/albums"} />
           {user.role === "artist" && (
             <SidebarItems
               label="Artist Studio"
@@ -34,13 +27,6 @@ function Sidebar() {
         </div>
         <div>
           <SidebarItems label={user.username} icon={User} path={"/profile"} />
-          {/* <button
-            onClick={handleLogout}
-            className="flex justify-start w-full items-center gap-2 p-3 text-[14px] rounded-md font-semibold hover:bg-[#1DB954]/10 my-2 cursor-pointer"
-          >
-            <LogOutIcon size={28} className="text-[#1DB954]" />
-            <span>Logout</span>
-          </button> */}
         </div>
       </div>
     </div>

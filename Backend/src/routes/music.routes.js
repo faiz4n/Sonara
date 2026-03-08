@@ -30,7 +30,14 @@ router.post(
   upload.single("file"),
   musicController.createAlbum,
 );
+router.post(
+  "/album/delete/:albumId",
+  authMiddleware.authArtist,
+  musicController.deleteAlbumById,
+);
 router.get("/album", musicController.getAllAlbums);
+router.get("/album/me", authMiddleware.authArtist, musicController.getMyAlbums);
+
 router.get("/album/:albumId", musicController.getAlbumById);
 
 module.exports = router;
