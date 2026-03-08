@@ -6,7 +6,7 @@ import Button from "../UI/Button";
 import FormHeading from "../UI/FormHeading";
 import { useState } from "react";
 import { uploadMusic } from "../../services/music.service";
-import UploadSpinner from "../UI/UploadSpinner";
+import Spinner from "../UI/Spinner";
 
 function UploadMusicForm({ setTrackList, resetModal }) {
   const [songTitle, setSongTitle] = useState("");
@@ -172,7 +172,7 @@ function UploadMusicForm({ setTrackList, resetModal }) {
           </div>
         </>
       )}
-      {isUploading && <UploadSpinner />}
+      {isUploading && <Spinner message={"Uploading your track..."} />}
 
       {uploadSuccess && (
         <div className=" flex flex-col items-center justify-center h-full">

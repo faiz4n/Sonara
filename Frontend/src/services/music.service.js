@@ -1,13 +1,24 @@
 import api from "./api";
 
-export async function getAllMusic() {
-  const response = await api.get("/api/music");
-  return response.data;
+export async function getAllMusic(setIsLoading) {
+  try {
+    setIsLoading(true);
+    const response = await api.get("/api/music");
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
 }
 
 export async function getMyMusic() {
-  const response = await api.get("/api/music/me");
-  return response.data.result;
+  try {
+    const response = await api.get("/api/music/me");
+    return response.data.result;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export async function deleteMusicById(id) {
@@ -16,9 +27,46 @@ export async function deleteMusicById(id) {
   return response.data;
 }
 
-export async function getAllAlbums() {
-  const response = await api.get("/api/music/album");
+export async function deleteAlbumById(id) {
+  const response = await api.post(`/api/music/album/delete/${id}`);
+  console.log(response);
   return response.data;
+}
+
+export async function getAllAlbums(setIsLoading) {
+  try {
+    setIsLoading(true);
+    const response = await api.get("/api/music/album");
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+export async function getMyAlbums(setIsLoading) {
+  try {
+    setIsLoading(true);
+    const result = await api.get("/api/music/album/me");
+    return result.data;
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+export async function getAlbumById(id, setIsLoading) {
+  try {
+    setIsLoading(true);
+    const response = await api.get(`/api/music/album/${id}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
 }
 
 export async function uploadMusic(formData, setIsUploading, setUploadSuccess) {

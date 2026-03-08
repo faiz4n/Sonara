@@ -67,8 +67,8 @@ Sonara/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/faiz4n/sonara.git
-cd sonara
+git clone https://github.com/faiz4n/Sonara.git
+cd Sonara
 ```
 
 2. **Backend Setup**

@@ -1,24 +1,15 @@
-import { useEffect, useState } from "react";
-import { getAllAlbums } from "../../services/music.service";
 import AlbumItem from "../music/AlbumItem";
-import { CirclePlus, Disc, Minus, Plus, Upload, X } from "lucide-react";
+import { Library, Minus, Plus, Upload } from "lucide-react";
 import DropDown from "../UI/DropDown";
 import UploadMusicForm from "../forms/UploadMusicForm";
 import CreateAlbumForm from "../forms/CreateAlbumForm";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function ArtistAlbumList({ trackList, setTrackList }) {
-  const [albums, setAlbums] = useState([]);
+function ArtistAlbumList({ trackList, setTrackList, albums, setAlbums }) {
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-
-  useEffect(function () {
-    async function fetchAlbums() {
-      const response = await getAllAlbums();
-      setAlbums(response.albums);
-    }
-    fetchAlbums();
-  }, []);
 
   function handleNewTrack() {
     setIsModelOpen(true);
@@ -65,6 +56,9 @@ function ArtistAlbumList({ trackList, setTrackList }) {
           </button>
           {isDropdownOpen && (
             <DropDown
+              className={
+                "fixed bottom-42 right-5 z-20 bg-green-950/80 p-2 rounded-md w-41 backdrop-blur-2xl shadow-lg"
+              }
               dropDownList={[
                 {
                   label: "Upload New Track",
@@ -73,23 +67,33 @@ function ArtistAlbumList({ trackList, setTrackList }) {
                 },
                 {
                   label: "Create New Album",
-                  icon: Disc,
+                  icon: Library,
                   onClick: handleNewAlbum,
                 },
               ]}
             />
           )}
+          <div
+            className={`fixed inset-0 bg-black/30 backdrop-blur-md z-10 transition duration-200 ease-in-out ${
+              isDropdownOpen
+                ? "opacity-100 pointer-events-auto"
+                : "opacity-0 pointer-events-none"
+            }`}
+            onClick={() => setIsDropdownOpen(false)}
+          />
         </div>
       </div>
 
       <div className="mt-7">
-        <div className="grid 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 lg:place-items-center md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-5">
+        <div className="grid 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-5">
           {albums.map((album) => (
-            <AlbumItem
+            <Link
+              to={`/albums/${album._id}`}
               key={album._id}
-              title={album.title}
-              albumArt={album.albumArt}
-            />
+              className="w-full"
+            >
+              <AlbumItem title={album.title} albumArt={album.albumArt} />
+            </Link>
           ))}
         </div>
       </div>

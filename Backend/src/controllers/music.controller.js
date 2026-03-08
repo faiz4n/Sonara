@@ -82,18 +82,38 @@ async function deleteMusicById(req, res) {
   return res.status(201).json({ msg: "Deleted Track", result });
 }
 
+async function deleteAlbumById(req, res) {
+  const result = await albumModel.findByIdAndDelete(req.params.albumId);
+  return res.status(201).json({ msg: "Album deleted successfully", result });
+}
+
 async function getAllAlbums(req, res) {
-  const albums = await albumModel.find().populate("artist");
+  const albums = await albumModel.find().populate("artist", "username");
 
   return res
     .status(200)
     .json({ msg: "All albums fetched successfully", albums });
 }
 
+async function getMyAlbums(req, res) {
+  const result = await albumModel
+    .find({ artist: req.user.id })
+    .populate("artist", "username");
+
+  return res
+    .status(200)
+    .json({ msg: "My albums fetched successfully", albums: result });
+}
+
 async function getAlbumById(req, res) {
   const albumId = req.params.albumId;
 
-  const album = await albumModel.findById(albumId);
+  const album = await albumModel
+    .findById(albumId)
+    .populate("artist", "username")
+    .populate("musics");
+
+  if (!album) return res.status(400).json({ msg: "Failed to fetch album" });
 
   return res.status(200).json({ msg: "Album fethced successfully", album });
 }
@@ -105,5 +125,7 @@ module.exports = {
   getAllAlbums,
   getAlbumById,
   getMyMusic,
+  getMyAlbums,
   deleteMusicById,
+  deleteAlbumById,
 };

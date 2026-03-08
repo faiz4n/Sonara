@@ -82,7 +82,7 @@ Sonara/
 
 ```bash
 git clone https://github.com/faiz4n/Sonara.git
-cd sonara
+cd Sonara
 ```
 
 2. **Backend Setup**
@@ -94,7 +94,6 @@ npm install
 # Create .env file with:
 # MONGODB_URI=your_mongodb_uri
 # IMAGEKIT_PRIVATE_KEY=your_imagekit_key
-# PORT=5000
 
 npm run dev
 ```
@@ -108,7 +107,7 @@ npm run dev
 ```
 
 The frontend will be available at `http://localhost:5173`
-The backend API will run on `http://localhost:5000`
+The backend API will run on `http://localhost:3000`
 
 ## API Endpoints
 
@@ -132,6 +131,28 @@ The backend API will run on `http://localhost:5000`
 
 ## Recent Updates
 
+### Version 1.2 - March 9, 2026 (Current)
+
+**Completed Features:**
+
+- ✅ Full album management system (create, view, delete)
+- ✅ Track management in Artist Studio
+- ✅ Album detail pages with responsive design
+- ✅ Ownership-based access control (delete/edit only for creators)
+- ✅ Fixed album grid inconsistencies in responsive layouts
+- ✅ Refactored AlbumPage into modular components (AlbumHeader, AlbumTrackList)
+- ✅ Real-time album creation (updates UI immediately without page reload)
+- ✅ Fixed nested button DOM structure issues
+- ✅ Consistent album item sizing across all screen sizes
+
+**In Progress:**
+
+- 🎵 Music Player - Currently building playback functionality
+
+**Known Limitations:**
+
+- Edit album button temporarily disabled (will be re-implemented later)
+
 ### Version 1.1 - March 7, 2026
 
 - ✅ Built complete profile page with user information
@@ -140,12 +161,24 @@ The backend API will run on `http://localhost:5000`
 - ✅ Added mobile-responsive layouts
 - ✅ Enhanced form error handling
 
+### Version 1.1 - March 7, 2026
 
+- ✅ Built complete profile page with user information
+- ✅ Fixed album creation with proper validation
+- ✅ Implemented track selection for album creation
+- ✅ Added mobile-responsive layouts
+- ✅ Enhanced form error handling
+
+## Current Development Focus
+
+The application has a solid foundation for album and track management. The next major feature under development is the **Music Player** which will include:
+
+- Audio playback controls (play, pause, skip, seek)
+- Progress tracking
+- Volume control
+- Playlist/queue management
+- Album/Artist switching during playback
 
 ## Contributing
 
 Contributions are welcome! Feel free to submit issues and pull requests.
-
----
-
-**Last Updated:** March 7, 2026

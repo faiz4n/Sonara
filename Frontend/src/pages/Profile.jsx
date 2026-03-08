@@ -3,6 +3,7 @@ import { useAuth } from "../context/authContext";
 import { User, Mail, Music, LogOut } from "lucide-react";
 import { logoutUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
+import formatDate from "../utils/formatDate";
 
 function Profile() {
   const { user, setUser } = useAuth();
@@ -65,7 +66,7 @@ function Profile() {
           <div className="flex gap-3">
             <button
               onClick={handleLogout}
-              className="flex-1 flex items-center justify-center gap-2 bg-red-600/20 hover:bg-red-600/30 text-red-400 font-semibold py-3 rounded-md transition-colors border border-red-500/30"
+              className="flex-1 flex items-center justify-center gap-2 bg-red-700/70 hover:bg-red-700/50 text-white font-semibold py-3 rounded-md transition-colors cursor-pointer"
             >
               <LogOut size={18} />
               Logout
@@ -80,7 +81,8 @@ function Profile() {
           </h3>
           <div className="bg-green-900/20 border border-zinc-100/10 p-6 rounded-lg space-y-3">
             <p className="text-sm text-zinc-300">
-              <span className="text-zinc-400">Member Since:</span> March 7, 2026
+              <span className="text-zinc-400">Member Since:</span>{" "}
+              {formatDate(user.createdAt)}
             </p>
             <p className="text-sm text-zinc-300">
               <span className="text-zinc-400">Status:</span>{" "}

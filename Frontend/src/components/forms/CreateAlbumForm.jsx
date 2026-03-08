@@ -1,4 +1,4 @@
-import { Disc, ImagePlus, ListPlus, Upload, X } from "lucide-react";
+import { Library, ImagePlus, ListPlus, Upload, X } from "lucide-react";
 import TrackSelector from "../UI/TrackSelector";
 import TextInput from "../UI/TextInput";
 import Button from "../UI/Button";
@@ -6,7 +6,7 @@ import FormHeading from "../UI/FormHeading";
 import { useState } from "react";
 import FileUploadField from "../UI/FileUploadField";
 import { createAlbum } from "../../services/music.service";
-import UploadSpinner from "../UI/UploadSpinner";
+import Spinner from "../UI/Spinner";
 
 function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
   const [albumTitle, setAlbumTitle] = useState("");
@@ -49,7 +49,7 @@ function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
       );
       console.log("album creation result : ", result);
       if (result) {
-        setAlbums((prev) => [...prev], result.album);
+        setAlbums((prev) => [...prev, result.album]);
       }
     } catch (err) {
       console.log(err);
@@ -90,7 +90,7 @@ function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
     >
       {!isUploading && !uploadSuccess && (
         <>
-          <FormHeading heading={"Create Album"} icon={Disc} />
+          <FormHeading heading={"Create Album"} icon={Library} />
 
           {error && (
             <p className="text-red-400 text-xs text-center bg-red-500/30 p-2 rounded">
@@ -134,7 +134,7 @@ function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
           </div>
         </>
       )}
-      {isUploading && <UploadSpinner />}
+      {isUploading && <Spinner message={"Creating album..."} />}
 
       {uploadSuccess && (
         <div className=" flex flex-col items-center justify-center h-full">
