@@ -34,7 +34,6 @@ function ArtistStudio() {
     }
     fetchMyAlbums();
   }, []);
-  console.log(albums);
   const headers = {
     heading: "Artist Studio",
     caption: "Mangage your tracks and organize your discography",

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 async function authArtist(req, res, next) {
   // Try to get token from cookie first, then from Authorization header
   let token = req.cookies.token;
-  
+
   if (!token) {
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith("Bearer ")) {

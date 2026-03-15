@@ -27,7 +27,6 @@ function AlbumPage() {
   async function handleDeleteAlbum(id) {
     const result = await deleteAlbumById(id);
     navigate(-1);
-    console.log(result);
   }
 
   return (

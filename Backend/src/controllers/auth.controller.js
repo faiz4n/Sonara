@@ -70,7 +70,6 @@ async function loginUser(req, res) {
     },
     process.env.JWT_SECRET,
   );
-  console.log(token);
 
   res.cookie("token", token, {
     httpOnly: true,
@@ -99,7 +98,7 @@ async function logoutUser(req, res) {
 async function verifyUser(req, res) {
   // Try to get token from cookie first, then from Authorization header
   let token = req.cookies.token;
-  
+
   if (!token) {
     const authHeader = req.headers.authorization;
     if (authHeader && authHeader.startsWith("Bearer ")) {
