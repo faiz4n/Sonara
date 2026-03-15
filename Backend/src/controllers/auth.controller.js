@@ -38,6 +38,7 @@ async function registerUser(req, res) {
   });
   res.status(200).json({
     msg: "User created successfully",
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -79,6 +80,7 @@ async function loginUser(req, res) {
   });
   res.status(200).json({
     msg: "User logged in successfully",
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -95,7 +97,15 @@ async function logoutUser(req, res) {
 }
 
 async function verifyUser(req, res) {
-  const token = req.cookies.token;
+  // Try to get token from cookie first, then from Authorization header
+  let token = req.cookies.token;
+  
+  if (!token) {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+      token = authHeader.substring(7); // Remove "Bearer " prefix
+    }
+  }
 
   if (!token) return res.status(401).json({ msg: "Unauthorized", user: null });
 

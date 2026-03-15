@@ -9,6 +9,14 @@ export function AuthProvider({ children }) {
   useEffect(function () {
     async function checkAuth() {
       try {
+        // Check if token exists in localStorage
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+
         const currentUser = await getCurrentUser();
         if (!currentUser) {
           setUser(null);
@@ -17,6 +25,8 @@ export function AuthProvider({ children }) {
         setUser(currentUser);
       } catch {
         setUser(null);
+        // Clear invalid token
+        localStorage.removeItem("token");
       } finally {
         setLoading(false);
       }
