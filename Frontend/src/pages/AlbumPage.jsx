@@ -17,7 +17,7 @@ function AlbumPage() {
     function () {
       async function fetchAlbumById() {
         const result = await getAlbumById(albumId, setIsLoading);
-        setAlbum((prev) => result.album);
+        setAlbum((prev) => result?.album || null);
       }
       fetchAlbumById();
     },

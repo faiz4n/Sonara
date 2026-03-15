@@ -12,8 +12,8 @@ function HomePage() {
     async function fetchMusic() {
       try {
         const response = await getAllMusic(setIsLoading);
-        console.log(response.musics);
-        setTracks(response.musics);
+        console.log(response);
+        setTracks((response && response.musics) || []);
       } catch {
         setTracks([]);
       }

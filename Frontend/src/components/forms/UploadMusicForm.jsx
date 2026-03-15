@@ -96,7 +96,8 @@ function UploadMusicForm({ setTrackList, resetModal }) {
         setIsUploading,
         setUploadSuccess,
       );
-      if (result) setTrackList((prev) => [result.music, ...prev]);
+      if (result && result.music)
+        setTrackList((prev) => [result.music, ...prev]);
       console.log(result);
     } catch (err) {
       console.log("Upload failed: ", err);

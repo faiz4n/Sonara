@@ -48,7 +48,7 @@ function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
         setUploadSuccess,
       );
       console.log("album creation result : ", result);
-      if (result) {
+      if (result && result.album) {
         setAlbums((prev) => [...prev, result.album]);
       }
     } catch (err) {

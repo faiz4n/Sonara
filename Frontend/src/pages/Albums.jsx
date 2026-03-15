@@ -11,7 +11,7 @@ function Albums() {
   useEffect(function () {
     async function fetchAlbums() {
       const response = await getAllAlbums(setIsLoading);
-      setAlbums(response.albums);
+      setAlbums((response && response.albums) || []);
     }
     fetchAlbums();
   }, []);

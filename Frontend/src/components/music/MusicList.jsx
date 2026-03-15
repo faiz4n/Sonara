@@ -1,10 +1,10 @@
 import MusicItem from "./MusicItem";
 
-function MusicList({ tracks }) {
+function MusicList({ tracks = [] }) {
   return (
     <div>
       <ul className="flex flex-col ">
-        {tracks.map((track) => (
+        {tracks?.map((track) => (
           <li key={track._id}>
             <MusicItem
               title={track.title}

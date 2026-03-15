@@ -6,7 +6,12 @@ import CreateAlbumForm from "../forms/CreateAlbumForm";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function ArtistAlbumList({ trackList, setTrackList, albums, setAlbums }) {
+function ArtistAlbumList({
+  trackList = [],
+  setTrackList,
+  albums = [],
+  setAlbums,
+}) {
   const [isModalOpen, setIsModelOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
@@ -86,7 +91,7 @@ function ArtistAlbumList({ trackList, setTrackList, albums, setAlbums }) {
 
       <div className="mt-7">
         <div className="grid 2xl:grid-cols-7 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-3 grid-cols-2 gap-5">
-          {albums.map((album) => (
+          {albums?.map((album) => (
             <Link
               to={`/albums/${album._id}`}
               key={album._id}

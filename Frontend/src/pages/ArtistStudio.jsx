@@ -22,7 +22,7 @@ function ArtistStudio() {
   useEffect(function () {
     async function fetchArtistMusic() {
       const result = await getMyMusic();
-      setTrackList(result);
+      setTrackList(result || []);
     }
     fetchArtistMusic();
   }, []);
@@ -30,7 +30,7 @@ function ArtistStudio() {
   useEffect(function () {
     async function fetchMyAlbums() {
       const response = await getMyAlbums(setIsLoading);
-      setAlbums(response.albums);
+      setAlbums((response && response.albums) || []);
     }
     fetchMyAlbums();
   }, []);

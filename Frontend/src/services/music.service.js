@@ -7,6 +7,7 @@ export async function getAllMusic(setIsLoading) {
     return response.data;
   } catch (err) {
     console.log(err);
+    return { musics: [] };
   } finally {
     setIsLoading(false);
   }
@@ -15,9 +16,10 @@ export async function getAllMusic(setIsLoading) {
 export async function getMyMusic() {
   try {
     const response = await api.get("/api/music/me");
-    return response.data.result;
+    return response.data.result || [];
   } catch (err) {
     console.log(err);
+    return [];
   }
 }
 
@@ -40,6 +42,7 @@ export async function getAllAlbums(setIsLoading) {
     return response.data;
   } catch (err) {
     console.log(err);
+    return { albums: [] };
   } finally {
     setIsLoading(false);
   }
@@ -52,6 +55,7 @@ export async function getMyAlbums(setIsLoading) {
     return result.data;
   } catch (err) {
     console.log(err);
+    return { albums: [] };
   } finally {
     setIsLoading(false);
   }
@@ -64,6 +68,7 @@ export async function getAlbumById(id, setIsLoading) {
     return response.data;
   } catch (err) {
     console.log(err);
+    return { album: null };
   } finally {
     setIsLoading(false);
   }
@@ -90,11 +95,13 @@ export async function createAlbum(formData, setIsUploading, setUploadSuccess) {
     setIsUploading(true);
     const response = await api.post("/api/music/album", formData);
     console.log(response.data);
+    setUploadSuccess(true);
     return response.data;
   } catch (err) {
     console.log(err);
+    setUploadSuccess(false);
+    return null;
   } finally {
     setIsUploading(false);
-    setUploadSuccess(true);
   }
 }
