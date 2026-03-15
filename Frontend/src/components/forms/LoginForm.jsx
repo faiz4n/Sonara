@@ -17,6 +17,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   //Heading
   const headers = {
@@ -32,6 +33,7 @@ function LoginForm() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
+    setIsLoading(true);
     try {
       const res = await loginUser({ email, password });
       if (res) {
@@ -40,6 +42,8 @@ function LoginForm() {
       }
     } catch (err) {
       setApiError(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -69,7 +73,11 @@ function LoginForm() {
           error={errors.password}
         />
 
-        <Button label={"Login"} onClick={handleLoginUser} />
+        <Button
+          label={isLoading ? "Logging in..." : "Login"}
+          onClick={handleLoginUser}
+          disabled={isLoading}
+        />
         <FormFooter type="login" />
       </div>
     </form>

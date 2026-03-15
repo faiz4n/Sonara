@@ -20,6 +20,7 @@ function RegisterForm() {
   const [role, setRole] = useState("listener");
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   //Heading
   const headers = {
@@ -35,6 +36,7 @@ function RegisterForm() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
+    setIsLoading(true);
     try {
       const res = await registerUser({ username, email, password, role });
       if (res) {
@@ -43,6 +45,8 @@ function RegisterForm() {
       }
     } catch (err) {
       setApiError(err.response?.data?.msg || "Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -83,7 +87,12 @@ function RegisterForm() {
         />
         <RoleSelector role={role} setRole={setRole} />
         <input type="hidden" name="role" value={role} />
-        <Button label={"Register"} onClick={handleRegisterUser} type="submit" />
+        <Button
+          label={isLoading ? "Creating account..." : "Register"}
+          onClick={handleRegisterUser}
+          type="submit"
+          disabled={isLoading}
+        />
         <FormFooter type="register" />
       </div>
     </form>
