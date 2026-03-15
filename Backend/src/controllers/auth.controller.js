@@ -98,15 +98,15 @@ async function logoutUser(req, res) {
 async function verifyUser(req, res) {
   const token = req.cookies.token;
 
-  if (!token) return res.status(401).json({ msg: "Unauthorized", user: null });
+  if (!token) return res.status(200).json({ msg: "No token", user: null });
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await userModel.findById(decoded.id).select("-password");
-    return res.status(201).json({ msg: "Verified", user });
+    return res.status(200).json({ msg: "Verified", user });
   } catch (err) {
     console.log(err);
-    return res.status(401).json({ msg: "Unauthorized" });
+    return res.status(200).json({ msg: "Invalid token", user: null });
   }
 }
 
