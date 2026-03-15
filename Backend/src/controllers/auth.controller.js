@@ -33,7 +33,7 @@ async function registerUser(req, res) {
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
   res.status(200).json({
@@ -74,7 +74,7 @@ async function loginUser(req, res) {
   res.cookie("token", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: "none",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
   res.status(200).json({
@@ -96,15 +96,7 @@ async function logoutUser(req, res) {
 }
 
 async function verifyUser(req, res) {
-  // Try to get token from cookie first, then from Authorization header
-  let token = req.cookies.token;
-
-  if (!token) {
-    const authHeader = req.headers.authorization;
-    if (authHeader && authHeader.startsWith("Bearer ")) {
-      token = authHeader.substring(7); // Remove "Bearer " prefix
-    }
-  }
+  const token = req.cookies.token;
 
   if (!token) return res.status(401).json({ msg: "Unauthorized", user: null });
 
