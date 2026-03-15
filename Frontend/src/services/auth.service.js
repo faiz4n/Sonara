@@ -18,5 +18,3 @@ export async function getCurrentUser() {
   const res = await api.get("/api/auth/me");
   return res.data.user;
 }
-
-export default { registerUser, loginUser };
