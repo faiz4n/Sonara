@@ -39,7 +39,7 @@ function App() {
                   <Sidebar />
                   <SidebarMobile />
 
-                  <div className="flex-1 overflow-y-auto overflow-x-hidden md:ml-80 max-md:mb-19 max-md:mt-24.5 w-full md:w-auto">
+                  <div className="flex-1 overflow-y-auto overflow-x-hidden md:ml-80 max-md:mb-36 max-md:mt-24.5 w-full md:w-auto">
                     <Routes>
                       <Route path="/" element={<HomePage />} />
                       <Route path="/albums" element={<Albums />} />
