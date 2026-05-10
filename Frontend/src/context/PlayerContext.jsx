@@ -138,6 +138,15 @@ export function PlayerProvider({ children }) {
         seek,
         skipNext,
         skipPrevious,
+        resetPlayer: () => {
+          audioRef.current.pause();
+          audioRef.current.src = "";
+          setCurrentTrack(null);
+          setIsPlaying(false);
+          setProgress(0);
+          setDuration(0);
+          setQueue([]);
+        },
       }}
     >
       {children}
