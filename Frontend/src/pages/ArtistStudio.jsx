@@ -21,16 +21,26 @@ function ArtistStudio() {
 
   useEffect(function () {
     async function fetchArtistMusic() {
-      const result = await getMyMusic();
-      setTrackList(result || []);
+      try {
+        const result = await getMyMusic();
+        setTrackList(result || []);
+      } catch (err) {
+        console.error("Failed to fetch music:", err);
+        setTrackList([]);
+      }
     }
     fetchArtistMusic();
   }, []);
 
   useEffect(function () {
     async function fetchMyAlbums() {
-      const response = await getMyAlbums(setIsLoading);
-      setAlbums((response && response.albums) || []);
+      try {
+        const response = await getMyAlbums(setIsLoading);
+        setAlbums((response && response.albums) || []);
+      } catch (err) {
+        console.error("Failed to fetch albums:", err);
+        setAlbums([]);
+      }
     }
     fetchMyAlbums();
   }, []);

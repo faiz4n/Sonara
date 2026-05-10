@@ -55,14 +55,14 @@ function ArtistAlbumList({
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen((prev) => !prev)}
-            className="w-14 h-14 md:w-17 md:h-17 fixed bottom-[12%] md:bottom-[8%] md:right-[5%] right-[7%] z-40 flex justify-center items-center p-2 rounded-full cursor-pointer gap-2 bg-green-500 hover:bg-green-600 shadow-lg shadow-green-400/20 active:scale-95 outline-none transition-all"
+            className="w-14 h-14 md:w-17 md:h-17 fixed bottom-[156px] md:bottom-[8%] md:right-[5%] right-[7%] z-40 flex justify-center items-center p-2 rounded-full cursor-pointer gap-2 bg-green-500 hover:bg-green-600 shadow-lg shadow-green-400/20 active:scale-95 outline-none transition-all"
           >
             {isDropdownOpen ? <Minus /> : <Plus />}
           </button>
           {isDropdownOpen && (
             <DropDown
               className={
-                "fixed bottom-42 right-5 z-20 bg-green-950/80 p-2 rounded-md w-41 backdrop-blur-2xl shadow-lg"
+                "fixed bottom-[236px] md:bottom-42 right-5 z-20 bg-green-950/80 p-2 rounded-md w-41 backdrop-blur-2xl shadow-lg"
               }
               dropDownList={[
                 {

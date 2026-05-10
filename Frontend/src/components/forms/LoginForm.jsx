@@ -48,7 +48,10 @@ function LoginForm() {
   }
 
   return (
-    <form className="flex flex-col mx-2 text-white bg-green-800/20 gap-2 py-5 px-5 border-2 max-w-90 w-full  border-zinc-200/20 rounded-lg">
+    <form
+      onSubmit={handleLoginUser}
+      className="flex flex-col mx-2 text-white bg-green-800/20 gap-2 py-5 px-5 border-2 max-w-90 w-full  border-zinc-200/20 rounded-lg"
+    >
       <FormHeading heading={headers.heading} caption={headers.caption} />
       {apiError && (
         <p className="text-red-400 text-xs text-center bg-red-500/30 p-2 rounded">
@@ -75,7 +78,7 @@ function LoginForm() {
 
         <Button
           label={isLoading ? "Logging in..." : "Login"}
-          onClick={handleLoginUser}
+          type="submit"
           disabled={isLoading}
         />
         <FormFooter type="login" />

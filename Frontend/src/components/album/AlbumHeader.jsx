@@ -1,13 +1,35 @@
-import { Edit, MoreHorizontal, Play, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Pause, Play, Trash } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../../context/authContext";
 import DropDown from "../UI/DropDown";
+import { usePlayer } from "../../context/PlayerContext";
 
 function AlbumHeader({ album, albumId, onDelete }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user } = useAuth();
+  const { playTrack, togglePlay, currentTrack, isPlaying } = usePlayer();
 
   const isOwner = user && album?.artist?._id === user._id;
+
+  // Check if any track from this album is currently loaded
+  const albumTracks = album?.musics || [];
+  const isThisAlbumPlaying =
+    isPlaying && albumTracks.some((t) => t._id === currentTrack?._id);
+
+  const handlePlayButton = () => {
+    if (!albumTracks.length) return;
+
+    if (isThisAlbumPlaying) {
+      // Pause if this album is currently playing
+      togglePlay();
+    } else if (albumTracks.some((t) => t._id === currentTrack?._id)) {
+      // Resume if paused on a track from this album
+      togglePlay();
+    } else {
+      // Start from the first track
+      playTrack(albumTracks[0], albumTracks);
+    }
+  };
 
   const dropdownItems = [
     {
@@ -35,12 +57,18 @@ function AlbumHeader({ album, albumId, onDelete }) {
         </h1>
         <div className="flex gap-2 text-lg max-md:text-sm text-zinc-200/60">
           <p>{album?.artist?.username || "Artist"}</p>•
-          <p>{`${album?.musics?.length || 0} ${album?.musics?.length > 1 ? "Tracks" : "Track"}`}</p>
+          <p>{`${albumTracks.length || 0} ${albumTracks.length > 1 ? "Tracks" : "Track"}`}</p>
         </div>
         <div className="flex gap-3 items-end ">
-          <button className="w-30 max-md:w-40 max-md:mt-6 flex items-center justify-center gap-2 shadow-lg shadow-green-300/25 bg-green-500 px-2 py-3 mt-2 rounded-full cursor-pointer hover:-translate-y-1 transition-all ease-in duration-100 active:scale-95">
-            <Play fill="white" />
-            Play
+          <button
+            onClick={handlePlayButton}
+            className="w-30 max-md:w-40 max-md:mt-6 flex items-center justify-center gap-2 shadow-lg shadow-green-300/25 bg-green-500 px-2 py-3 mt-2 rounded-full cursor-pointer hover:-translate-y-1 transition-all ease-in duration-100 active:scale-95"
+          >
+            {isThisAlbumPlaying ? (
+              <><Pause fill="white" /> Pause</>
+            ) : (
+              <><Play fill="white" /> Play</>
+            )}
           </button>
           {isOwner && (
             <div className="relative">

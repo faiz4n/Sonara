@@ -10,10 +10,15 @@ function TrackRow({
   coverImage,
 }) {
   async function handleDeleteTrack(id) {
-    const res = await deleteMusicById(id);
-    console.log(res);
-    // Update UI immediately by removing the deleted track
-    setTrackList((prev) => prev.filter((track) => track._id !== id));
+    try {
+      const res = await deleteMusicById(id);
+      console.log(res);
+      // Update UI only after successful deletion
+      setTrackList((prev) => prev.filter((track) => track._id !== id));
+    } catch (err) {
+      console.error("Failed to delete track:", err);
+      alert("Failed to delete track. Please try again.");
+    }
   }
   return (
     <div className="flex items-center bg-green-900/20 border border-zinc-100/10 p-3 border-t-0 ">

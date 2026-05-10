@@ -121,7 +121,7 @@ function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
               <Button
                 label={"Create Album"}
                 icon={ListPlus}
-                onClick={handleCreateAlbum}
+                type="submit"
               />
               <button
                 onClick={resetModal}

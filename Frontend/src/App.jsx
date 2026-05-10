@@ -13,12 +13,16 @@ import SidebarMobile from "./components/layout/SidebarMobile";
 import PageHeader from "./components/layout/PageHeader";
 import Header from "./components/UI/Header";
 import AlbumPage from "./pages/AlbumPage";
+import Player from "./components/UI/Player";
+
+import { PlayerProvider } from "./context/PlayerContext";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
+      <PlayerProvider>
+        <BrowserRouter>
+          <Routes>
           {/* Standalone pages (no sidebar) — only for guests */}
           <Route element={<GuestRoute />}>
             <Route path="/register" element={<Register />} />
@@ -33,6 +37,7 @@ function App() {
                 <div className="h-screen text-white flex flex-col">
                   <Header />
                   <Sidebar />
+                  <SidebarMobile />
 
                   <div className="flex-1 overflow-y-auto overflow-x-hidden md:ml-80 max-md:mb-19 max-md:mt-24.5 w-full md:w-auto">
                     <Routes>
@@ -48,13 +53,16 @@ function App() {
                       </Route>
                     </Routes>
                   </div>
-                  <SidebarMobile />
+
+                  {/* Global Player — persists across all pages */}
+                  <Player />
                 </div>
               }
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+        </BrowserRouter>
+      </PlayerProvider>
     </AuthProvider>
   );
 }

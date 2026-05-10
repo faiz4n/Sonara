@@ -117,7 +117,7 @@ function UploadMusicForm({ setTrackList, resetModal }) {
   }
 
   return (
-    <form className="flex flex-col mx-2 bg-green-950 gap-2 py-5 px-5 border-2 max-w-95 w-full  border-zinc-200/20 rounded-lg">
+    <form onSubmit={handleUpload} className="flex flex-col mx-2 bg-green-950 gap-2 py-5 px-5 border-2 max-w-95 w-full  border-zinc-200/20 rounded-lg">
       {!isUploading && !uploadSuccess && (
         <>
           <div className="flex items-center gap-2">
@@ -160,7 +160,8 @@ function UploadMusicForm({ setTrackList, resetModal }) {
               <Button
                 label={!uploadSuccess ? "Upload Track" : "Done"}
                 icon={uploadSuccess ? Check : Upload}
-                onClick={handleUpload}
+                type="submit"
+                disabled={uploadSuccess}
               />
               <button
                 onClick={resetModal}
