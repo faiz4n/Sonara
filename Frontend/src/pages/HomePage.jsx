@@ -27,13 +27,13 @@ function HomePage() {
   return (
     <>
       {!isLoading && (
-        <>
+        <div className="flex flex-col h-full">
           <PageHeader heading={headers.heading} caption={headers.caption} />
 
-          <div className="md:p-5">
+          <div className="md:p-5 flex-1 overflow-y-auto">
             <MusicList tracks={tracks} />
           </div>
-        </>
+        </div>
       )}
       {isLoading && <Spinner message={"Loading..."} />}
     </>

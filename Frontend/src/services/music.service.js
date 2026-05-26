@@ -22,13 +22,23 @@ export async function getMyMusic() {
 }
 
 export async function deleteMusicById(id) {
-  const response = await api.post(`/api/music/delete/${id}`);
-  return response.data;
+  try {
+    const response = await api.post(`/api/music/delete/${id}`);
+    return response.data;
+  } catch (err) {
+    console.error("Delete music failed:", err);
+    throw err;
+  }
 }
 
 export async function deleteAlbumById(id) {
-  const response = await api.post(`/api/music/album/delete/${id}`);
-  return response.data;
+  try {
+    const response = await api.post(`/api/music/album/delete/${id}`);
+    return response.data;
+  } catch (err) {
+    console.error("Delete album failed:", err);
+    throw err;
+  }
 }
 
 export async function getAllAlbums(setIsLoading) {

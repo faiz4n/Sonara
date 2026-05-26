@@ -10,8 +10,13 @@ function Albums() {
 
   useEffect(function () {
     async function fetchAlbums() {
-      const response = await getAllAlbums(setIsLoading);
-      setAlbums((response && response.albums) || []);
+      try {
+        const response = await getAllAlbums(setIsLoading);
+        setAlbums((response && response.albums) || []);
+      } catch (err) {
+        console.error("Failed to fetch albums:", err);
+        setAlbums([]);
+      }
     }
     fetchAlbums();
   }, []);

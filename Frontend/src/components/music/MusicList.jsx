@@ -7,12 +7,7 @@ function MusicList({ tracks = [] }) {
         <ul className="flex flex-col ">
           {tracks.map((track) => (
             <li key={track._id}>
-              <MusicItem
-                title={track.title}
-                artist={track.artist?.username}
-                duration={track.duration}
-                coverImage={track.coverImage}
-              />
+              <MusicItem track={track} queue={tracks} />
             </li>
           ))}
         </ul>

@@ -15,7 +15,7 @@ function TrackSelector({ trackList, setSelectedTracks }) {
                       setSelectedTracks((prev) => [...prev, track._id]);
                     } else {
                       setSelectedTracks((prev) =>
-                        prev.filter((t) => t._id !== track._id),
+                        prev.filter((t) => t !== track._id),
                       );
                     }
                   }}

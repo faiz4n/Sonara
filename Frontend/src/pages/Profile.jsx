@@ -4,9 +4,11 @@ import { User, Mail, Music, LogOut } from "lucide-react";
 import { logoutUser } from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 import formatDate from "../utils/formatDate";
+import { usePlayer } from "../context/PlayerContext";
 
 function Profile() {
   const { user, setUser } = useAuth();
+  const { resetPlayer } = usePlayer();
   const navigate = useNavigate();
 
   const headers = {
@@ -16,6 +18,7 @@ function Profile() {
 
   async function handleLogout() {
     await logoutUser();
+    resetPlayer();
     setUser(null);
     navigate("/login", { replace: true });
   }
