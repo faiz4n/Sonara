@@ -15,7 +15,6 @@ async function authArtist(req, res, next) {
 
     next();
   } catch (err) {
-    console.log(err);
     return res.status(401).json({ msg: "Unauthorized" });
   }
 }

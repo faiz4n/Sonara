@@ -56,7 +56,6 @@ async function createAlbum(req, res) {
       },
     });
   } catch (err) {
-    console.error("Create album error:", err);
     res.status(500).json({ msg: err.message || "Failed to create album" });
   }
 }

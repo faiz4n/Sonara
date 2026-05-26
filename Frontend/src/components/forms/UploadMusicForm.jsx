@@ -98,10 +98,7 @@ function UploadMusicForm({ setTrackList, resetModal }) {
       );
       if (result && result.music)
         setTrackList((prev) => [result.music, ...prev]);
-      console.log(result);
     } catch (err) {
-      console.log("Upload failed: ", err);
-
       setError(err.response?.data?.msg || "Something went wrong");
     }
   }

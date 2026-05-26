@@ -11,7 +11,6 @@ function TrackRow({
 }) {
   async function handleDeleteTrack(id) {
     const res = await deleteMusicById(id);
-    console.log(res);
     // Update UI immediately by removing the deleted track
     setTrackList((prev) => prev.filter((track) => track._id !== id));
   }

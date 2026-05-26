@@ -47,12 +47,10 @@ function CreateAlbumForm({ trackList, resetModal, setAlbums }) {
         setIsUploading,
         setUploadSuccess,
       );
-      console.log("album creation result : ", result);
       if (result && result.album) {
         setAlbums((prev) => [...prev, result.album]);
       }
     } catch (err) {
-      console.log(err);
     } finally {
       setIsUploading(false);
     }
